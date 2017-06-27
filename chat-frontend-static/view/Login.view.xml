@@ -1,7 +1,7 @@
 <mvc:View xmlns:mvc="sap.ui.core.mvc"
           xmlns="sap.m"
           controllerName="chatApp.controller.Login">
-    <Page class="sapUiContentPadding">
+    <Page class="sapUiContentPadding" title="{i18n>appName}">
         <content>
             <Label text="Nick Name" labelFor="nickNameInput"/>
             <Input
@@ -11,13 +11,14 @@
                     placeholder="Enter Nick Name ..."
                     valueStateText="Nick Name must not be empty. Maximum 10 characters."
                     value="{
-					path : '/nickName',
-					type : 'sap.ui.model.type.String',
-					constraints : {
-						minLength: 1,
-						maxLength: 10
-					}
-				}" />
+                        path : '/nickName',
+                        type : 'sap.ui.model.type.String',
+                        constraints : {
+                            minLength: 1,
+                            maxLength: 10
+                        }
+                    }"
+                    submit="onLogin"/>
             <Button press="onLogin" text="Login"></Button>
         </content>
     </Page>

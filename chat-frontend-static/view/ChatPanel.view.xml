@@ -14,8 +14,16 @@
                     class="sapUiLargeMarginEnd"/>
             <!---->
             <Input
-                    value="{panel>/message}"
+                    id="inputMessage"
+                    value="{
+                        path : 'panel>/message',
+                        type : 'sap.ui.model.type.String',
+                        constraints : {
+                            minLength: 1
+                        }
+                    }"
                     valueLiveUpdate="true"
+                    submit="send"
                     width="60%"
                     class="sapUiSmallMarginEnd"/>
             <Button
