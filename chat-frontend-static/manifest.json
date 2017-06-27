@@ -38,10 +38,6 @@
         "settings": {
           "bundleName": "chatApp.i18n.i18n"
         }
-      },
-      "message": {
-        "type": "sap.ui.model.json.JSONModel",
-        "uri": "mock/Messages.json"
       }
     },
     "routing": {

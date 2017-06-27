@@ -95,6 +95,11 @@ function onListening() {
 // Socket events
 io.on('connection', function (socket) {
   socket.on('new-connect', function (data) {
-    console.log(data.nickName+' connected');
+    console.log(data.nickName + ' connected');
+  });
+  socket.on('c2s', function (data) {
+    console.log(data.nickName + ' sent:' + data.message);
+    data.dateTime = new Date();
+    io.emit('s2c', data);
   });
 });

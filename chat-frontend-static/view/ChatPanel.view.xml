@@ -14,14 +14,14 @@
                     class="sapUiLargeMarginEnd"/>
             <!---->
             <Input
-                    value="123"
+                    value="{panel>/message}"
                     valueLiveUpdate="true"
                     width="60%"
                     class="sapUiSmallMarginEnd"/>
             <Button
                     icon="sap-icon://paper-plane"
                     text="{i18n>sendMsg}"
-                    press="onShowHello"
+                    press="send"
                     class="sapUiSmallMarginEnd"/>
 
         </content>

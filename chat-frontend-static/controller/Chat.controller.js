@@ -7,22 +7,27 @@ sap.ui.define([
 ], function (Controller, JSONModel, History, socketiojs) {
     "use strict";
     return Controller.extend("chatApp.controller.Chat", {
-        socket: io,
+        socket: null,
+        nickName: null,
         onInit: function () {
             var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             oRouter.getRoute("chat").attachPatternMatched(this._onObjectMatched, this);
 
             var oEventBus = sap.ui.getCore().getEventBus();
             oEventBus.subscribe('chatPanel', 'logout', this.onLogout, this);
+            oEventBus.subscribe('chatPanel', 'send', this.send, this);
         },
         _onObjectMatched: function (oEvent) {
+            this.nickName = oEvent.getParameter("arguments").nickName;
             var model = {
-                nickName: oEvent.getParameter("arguments").nickName
+                nickName: this.nickName
             };
             this.getView().setModel(new JSONModel(model));
             this.socket = io('http://localhost:3000');
 
             this.socket.emit('new-connect', model);
+
+            this.socket.on('s2c', this.receive)
         },
         onNavBack: function () {
             var oHistory = History.getInstance();
@@ -37,6 +42,16 @@ sap.ui.define([
         },
         onLogout: function (sChannel, sEvent) {
             this.onNavBack();
+        },
+        send: function (sChannel, sEvent, oData) {
+            this.socket.emit('c2s', {
+                nickName: this.nickName,
+                message: oData
+            })
+        },
+        receive: function (data) {
+            var oEventBus = sap.ui.getCore().getEventBus();
+            oEventBus.publish('chat', 'receive', data);
         }
     });
 });
