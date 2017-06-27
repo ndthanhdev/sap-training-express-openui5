@@ -1,10 +1,13 @@
+/* global _:true */
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
-    "sap/ui/core/routing/History"
-], function (Controller, JSONModel, History) {
+    "sap/ui/core/routing/History",
+    "chatApp/libs/socket.io"
+], function (Controller, JSONModel, History, socketiojs) {
     "use strict";
     return Controller.extend("chatApp.controller.Chat", {
+        socket: io,
         onInit: function () {
             var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             oRouter.getRoute("chat").attachPatternMatched(this._onObjectMatched, this);
@@ -13,10 +16,13 @@ sap.ui.define([
             oEventBus.subscribe('chatPanel', 'logout', this.onLogout, this);
         },
         _onObjectMatched: function (oEvent) {
-            this.getView().setModel(new JSONModel(
-                {
-                    nickName: oEvent.getParameter("arguments").nickName
-                }));
+            var model = {
+                nickName: oEvent.getParameter("arguments").nickName
+            };
+            this.getView().setModel(new JSONModel(model));
+            this.socket = io('http://localhost:3000');
+
+            this.socket.emit('new-connect', model);
         },
         onNavBack: function () {
             var oHistory = History.getInstance();
