@@ -1,9 +1,11 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/ui/model/json/JSONModel"
-], function (Controller, JSONModel) {
+    "sap/ui/model/json/JSONModel",
+    "chatApp/model/formatter"
+], function (Controller, JSONModel, formatter) {
     "use strict";
     return Controller.extend("chatApp.controller.MessageList", {
+        formatter: formatter,
         onInit: function () {
             this.getView().setModel(new JSONModel({
                 Messages: [{
@@ -21,7 +23,6 @@ sap.ui.define([
             var data = oModel.oData;
             data.Messages.unshift(oData);
             oModel.setData(data);
-            console.log(data);
         }
     });
 });

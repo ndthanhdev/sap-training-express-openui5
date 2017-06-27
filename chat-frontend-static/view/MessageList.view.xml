@@ -8,7 +8,10 @@
         <items>
             <NotificationListItem
                     title="{message>message}"
-                    datetime="{message>dateTime}"
+                    datetime="{
+                        path:'message>dateTime',
+                        formatter:'.formatter.formatDateTime'
+                    }"
                     authorName="{message>nickName}"
                     showCloseButton="false"/>
         </items>
