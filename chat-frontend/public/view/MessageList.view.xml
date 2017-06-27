@@ -1,0 +1,16 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+          xmlns="sap.m"
+          controllerName="chatApp.controller.MessageList">
+    <List
+            class="sapUiResponsiveMargin"
+            width="auto"
+            items="{message>/Messages}">
+        <items>
+            <NotificationListItem
+                    title="{message>message}"
+                    datetime="{message>dateTime}"
+                    authorName="{message>nickName}"
+                    showCloseButton="false"/>
+        </items>
+    </List>
+</mvc:View>

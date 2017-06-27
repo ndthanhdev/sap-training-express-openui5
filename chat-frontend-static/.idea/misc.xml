@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectResources">
+    <resource url="sap.m" location="$USER_HOME$/Desktop/sap.m.xsd" />
+    <resource url="sap.ui.core" location="$USER_HOME$/Desktop/sap.ui.core.xsd" />
+  </component>
+</project>

@@ -1,0 +1,84 @@
+{
+  "_version": "1.1.0",
+  "sap.app": {
+    "_version": "1.1.0",
+    "id": "chatApp",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "title": "{appName}",
+    "description": "Description",
+    "applicationVersion": {
+      "version": "1.0.0"
+    }
+  },
+  "sap.ui": {
+    "_version": "1.1.0",
+    "technology": "UI5",
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    },
+    "supportedThemes": [
+      "sap_belize"
+    ]
+  },
+  "sap.ui5": {
+    "_version": "1.1.0",
+    "rootView": "chatApp.view.App",
+    "dependencies": {
+      "minUI5Version": "1.30",
+      "libs": {
+        "sap.m": {}
+      }
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "chatApp.i18n.i18n"
+        }
+      },
+      "message": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "mock/Messages.json"
+      }
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "viewPath": "chatApp.view",
+        "controlId": "app",
+        "controlAggregation": "pages"
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "login",
+          "target": "login"
+        },
+        {
+          "pattern": "chat/{nickName}",
+          "name": "chat",
+          "target": "chat"
+        }
+      ],
+      "targets": {
+        "login": {
+          "viewName": "Login"
+        },
+        "chat": {
+          "viewName": "Chat"
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "stylesheet/style.css"
+        }
+      ]
+    }
+  }
+}
