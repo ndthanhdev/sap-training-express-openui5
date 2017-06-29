@@ -33,6 +33,9 @@ sap.ui.define([
             var oHistory = History.getInstance();
             var sPreviousHash = oHistory.getPreviousHash();
 
+            this.socket.emit('out');
+            console.log('out');
+
             if (sPreviousHash !== undefined) {
                 window.history.go(-1);
             } else {

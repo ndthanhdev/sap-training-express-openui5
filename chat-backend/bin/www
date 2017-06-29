@@ -102,4 +102,8 @@ io.on('connection', function (socket) {
     data.dateTime = new Date();
     io.emit('s2c', data);
   });
+  socket.on('out', function (data) {
+    console.log('disconnected');
+    socket.disconnect(true);
+  });
 });
