@@ -26,8 +26,8 @@ sap.ui.define([
             this.socket = io('http://localhost:3000');
 
             this.socket.emit('new-connect', model);
+            this.socket.on('s2c', this.receive);
 
-            this.socket.on('s2c', this.receive)
         },
         onNavBack: function () {
             var oHistory = History.getInstance();

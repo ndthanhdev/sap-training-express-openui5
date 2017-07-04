@@ -7,13 +7,19 @@ sap.ui.define([
     return Controller.extend("chatApp.controller.MessageList", {
         formatter: formatter,
         onInit: function () {
-            this.getView().setModel(new JSONModel({
-                Messages: [{
-                    nickName: "Chat With UI5",
-                    dateTime: new Date(),
-                    message: "you joined"
-                }]
-            }), 'message');
+
+            var oMessageModel = new sap.ui.model.json.JSONModel();
+            oMessageModel.loadData(
+                "http://localhost:3000/messages", null, false, 'GET'
+            );
+            var data = oMessageModel.oData;
+            data.Messages.unshift({
+                nickName: "Chat With UI5",
+                dateTime: new Date(),
+                message: "you joined"
+            });
+            oMessageModel.setData(data);
+            this.getView().setModel(oMessageModel, 'message');
 
             var oEventBus = sap.ui.getCore().getEventBus();
             oEventBus.subscribe('chat', 'receive', this.onReceive, this);

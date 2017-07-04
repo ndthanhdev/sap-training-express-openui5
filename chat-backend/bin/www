@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('chat:server');
 var http = require('http');
+var MessageModel = require('../models/messageModel');
 
 /**
  * Get port from environment and store in Express.
@@ -100,6 +101,8 @@ io.on('connection', function (socket) {
   socket.on('c2s', function (data) {
     console.log(data.nickName + ' sent:' + data.message);
     data.dateTime = new Date();
+    let model = MessageModel(data);
+    model.save();
     io.emit('s2c', data);
   });
   socket.on('out', function (data) {
